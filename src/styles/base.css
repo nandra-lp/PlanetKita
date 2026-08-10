@@ -1,0 +1,86 @@
+/* ============================================ */
+/* BASE ELEMENTS                                */
+/* ============================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      rgba(99, 102, 168, 0.06) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 40%,
+      rgba(184, 147, 95, 0.04) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      1px 1px at 12% 22%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 51%
+    ),
+    radial-gradient(
+      1px 1px at 78% 58%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 51%
+    ),
+    radial-gradient(
+      1px 1px at 42% 78%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 51%
+    ),
+    radial-gradient(
+      1px 1px at 64% 12%,
+      rgba(255, 255, 255, 0.25) 50%,
+      transparent 51%
+    ),
+    radial-gradient(
+      1px 1px at 28% 50%,
+      rgba(255, 255, 255, 0.18) 50%,
+      transparent 51%
+    ),
+    var(--bg-primary);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+/* Accessibility: focus states yang konsisten untuk navigasi keyboard */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+figure {
+  margin: 0;
+}
+img,
+video {
+  display: block;
+  max-width: 100%;
+  border-radius: 12px;
+}
