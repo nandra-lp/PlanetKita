@@ -1,42 +1,64 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext.jsx";
+import { LogOut } from "lucide-react"; // Pastikan lucide-react sudah diinstal
 
 export default function Navbar() {
   const { user, isAdmin, signOut } = useAuth();
 
+  // Fungsi helper untuk kelas aktif yang elegan
+  const navLinkClass = ({ isActive }) =>
+    `navbar-link ${isActive ? "active" : ""}`;
+
   return (
     <nav className="navbar">
       {/* Logo */}
-      <Link to={user ? "/home" : "/"} className="navbar-brand">
+      <NavLink to={user ? "/home" : "/"} className="navbar-brand">
         <span className="navbar-brand-icon">🪐</span>
-        <span>PlanetKita</span>
-      </Link>
+        <span className="navbar-brand-text">PlanetKita</span>
+      </NavLink>
 
-      {/* Menu: selalu sejajar di samping logo */}
+      {/* Menu Navigasi */}
       <div className="navbar-menu">
         <div className="navbar-links">
           {user ? (
             <>
-              <Link to="/home">Dashboard</Link>
-              <Link to="/planets">Planets</Link>
-              {isAdmin && <Link to="/admin">Admin</Link>}
+              <NavLink to="/home" className={navLinkClass}>
+                Dashboard
+              </NavLink>
+              <NavLink to="/planets" className={navLinkClass}>
+                Planets
+              </NavLink>
+              <NavLink to="/download-ar" className={navLinkClass}>
+                Aplikasi AR
+              </NavLink>
+              {isAdmin && (
+                <NavLink to="/admin" className={navLinkClass}>
+                  Admin
+                </NavLink>
+              )}
             </>
           ) : (
-            <a href="/#planets">Planet</a>
+            <a href="/#planets" className="navbar-link">
+              Planet
+            </a>
           )}
         </div>
 
+        {/* Auth Section */}
         <div className="navbar-auth">
           {user ? (
-            <button onClick={signOut}>Keluar</button>
+            <button onClick={signOut} className="btn-ghost" title="Keluar">
+              <LogOut size={18} />
+              <span>Keluar</span>
+            </button>
           ) : (
             <>
-              <Link to="/login" className="navbar-login-link">
+              <NavLink to="/login" className="navbar-link-auth">
                 Masuk
-              </Link>
-              <Link to="/register" className="btn-primary">
+              </NavLink>
+              <NavLink to="/register" className="btn-primary-sm">
                 Daftar
-              </Link>
+              </NavLink>
             </>
           )}
         </div>

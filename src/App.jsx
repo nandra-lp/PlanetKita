@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-
 import { useAuth } from "./contexts/AuthContext.jsx";
+
+// Import komponen baru
+import SmoothScroll from "./components/SmoothScroll.jsx";
 
 import Protected from "./components/Protected.jsx";
 import Navbar from "./components/Navbar.jsx";
@@ -13,6 +15,7 @@ import PlanetDetailPage from "./pages/PlanetDetailPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import AdminDashboardPage from "./pages/AdminDashboardPage.jsx";
+import DownloadARPage from "./pages/DownloadARPage.jsx";
 
 export default function App() {
   const { user, isAdmin, loading } = useAuth();
@@ -30,92 +33,96 @@ export default function App() {
   }
 
   return (
-    <>
+    // Bungkus seluruh aplikasi dengan SmoothScroll
+    <SmoothScroll>
       {isAdminRoute && isAdmin ? <AdminNavbar /> : <Navbar />}
 
       <main className="container">
         <Routes>
-        {/* =================================
-            PUBLIC LANDING
-            ================================= */}
+          {/* =================================
+              PUBLIC LANDING
+              ================================= */}
+          <Route
+            path="/"
+            element={user ? <Navigate to="/home" replace /> : <LandingPage />}
+          />
 
-        <Route
-          path="/"
-          element={user ? <Navigate to="/home" replace /> : <LandingPage />}
-        />
+          {/* =================================
+              AUTH
+              ================================= */}
+          <Route
+            path="/login"
+            element={user ? <Navigate to="/home" replace /> : <LoginPage />}
+          />
 
-        {/* =================================
-            AUTH
-            ================================= */}
+          <Route
+            path="/register"
+            element={user ? <Navigate to="/home" replace /> : <RegisterPage />}
+          />
 
-        <Route
-          path="/login"
-          element={user ? <Navigate to="/home" replace /> : <LoginPage />}
-        />
+          {/* =================================
+              USER HOME
+              ================================= */}
+          <Route
+            path="/home"
+            element={
+              <Protected>
+                <HomePage />
+              </Protected>
+            }
+          />
 
-        <Route
-          path="/register"
-          element={user ? <Navigate to="/home" replace /> : <RegisterPage />}
-        />
+          <Route
+            path="/planets"
+            element={
+              <Protected>
+                <PlanetPage />
+              </Protected>
+            }
+          />
 
-        {/* =================================
-            USER HOME
-            ================================= */}
+          <Route
+            path="/download-ar"
+            element={
+              <Protected>
+                <DownloadARPage />
+              </Protected>
+            }
+          />
 
-        <Route
-          path="/home"
-          element={
-            <Protected>
-              <HomePage />
-            </Protected>
-          }
-        />
+          {/* =================================
+              PLANET DETAIL
+              ================================= */}
+          <Route
+            path="/planet/:slug"
+            element={
+              <Protected>
+                <PlanetDetailPage />
+              </Protected>
+            }
+          />
 
-        <Route
-          path="/planets"
-          element={
-            <Protected>
-              <PlanetPage />
-            </Protected>
-          }
-        />
+          {/* =================================
+              ADMIN
+              ================================= */}
+          <Route
+            path="/admin"
+            element={
+              <Protected adminOnly>
+                <AdminDashboardPage />
+              </Protected>
+            }
+          />
 
-        {/* =================================
-            PLANET DETAIL
-            ================================= */}
-
-        <Route
-          path="/planet/:slug"
-          element={
-            <Protected>
-              <PlanetDetailPage />
-            </Protected>
-          }
-        />
-
-        {/* =================================
-            ADMIN
-            ================================= */}
-
-        <Route
-          path="/admin"
-          element={
-            <Protected adminOnly>
-              <AdminDashboardPage />
-            </Protected>
-          }
-        />
-
-        {/* =================================
-            FALLBACK
-            ================================= */}
-
-        <Route
-          path="*"
-          element={<Navigate to={user ? "/home" : "/"} replace />}
-        />
-      </Routes>
+          {/* =================================
+              FALLBACK
+              ================================= */}
+          <Route
+            path="*"
+            element={<Navigate to={user ? "/home" : "/"} replace />}
+          />
+        </Routes>
       </main>
-    </>
+    </SmoothScroll>
   );
 }

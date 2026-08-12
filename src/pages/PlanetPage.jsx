@@ -42,7 +42,7 @@ export default function PlanetPage() {
         className="section-header"
         style={{ marginBottom: 40, marginTop: 24, textAlign: "left" }}
       >
-        <h2 style={{ margin: 0 }}>Katalog Planet</h2>
+        <h2 style={{ margin: 0 }}>Daftar Planet</h2>
         <p className="small" style={{ marginTop: 8, maxWidth: 560 }}>
           Jelajahi berbagai planet di tata surya kita dan klik untuk melihat
           detail lengkap.
