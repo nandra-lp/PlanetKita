@@ -32,9 +32,7 @@
   /* Hairline border + highlight atas tipis, tanpa glow berwarna */
   border: 1px solid var(--nav-border);
   border-radius: var(--nav-radius);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 8px 24px rgba(0, 0, 0, 0.18);
+  box-shadow: none;
 
   position: sticky;
   top: 16px;
@@ -47,9 +45,7 @@
 
 .navbar.scrolled {
   background: rgba(15, 17, 28, 0.88);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 10px 28px rgba(0, 0, 0, 0.26);
+  box-shadow: none;
 }
 
 /* --- BRAND --- */
@@ -247,52 +243,90 @@
 /* ============================================ */
 /* RESPONSIVE NAVBAR                            */
 /* ============================================ */
+.mobile-menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary, #f8fafc);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.mobile-menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 @media (max-width: 768px) {
   .navbar {
-    padding: 10px 16px;
+    padding: 12px 16px;
     margin: 12px 12px 32px 12px;
     top: 12px;
-    gap: 12px;
   }
 
-  .navbar-brand-text {
-    display: none;
+  .mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .navbar-menu {
-    gap: 12px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(15, 17, 28, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    margin-top: 12px;
+    flex-direction: column;
+    padding: 24px;
+    gap: 24px;
+    /* Hidden by default on mobile */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .navbar-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
   .navbar-links {
-    gap: 2px;
-  }
-
-  .navbar-link {
-    padding: 8px 12px;
-    font-size: 13.5px;
-  }
-
-  .navbar-auth {
-    padding-left: 12px;
+    flex-direction: column;
+    width: 100%;
     gap: 8px;
   }
 
-  .navbar-link-auth {
-    display: none;
+  .navbar-link {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 16px;
   }
 
-  .btn-ghost span {
-    display: none;
+  .navbar-auth {
+    width: 100%;
+    flex-direction: column;
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 24px;
+    gap: 12px;
   }
 
-  .btn-ghost {
-    padding: 8px;
-    border-radius: 8px;
-  }
-
-  .btn-primary-sm {
-    padding: 8px 16px;
-    font-size: 13.5px;
+  .btn-ghost, .btn-primary-sm, .navbar-link-auth {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    display: flex; 
   }
 }
 

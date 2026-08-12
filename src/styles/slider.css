@@ -1,0 +1,254 @@
+/* Planet Slider Styles */
+.planet-slider-container {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  min-height: 400px;
+  max-height: 650px;
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 48px;
+  background-color: #050505;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.planet-slider-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.planet-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.planet-slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 8s ease-out, opacity 1s ease;
+}
+
+.planet-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      to top,
+      rgba(10, 11, 18, 0.95) 0%,
+      rgba(10, 11, 18, 0.4) 50%,
+      transparent 100%
+    ),
+    linear-gradient(to right, rgba(10, 11, 18, 0.7) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.planet-slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 40px;
+  padding-bottom: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
+.planet-slide-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.planet-slide-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.1;
+  margin: 0 0 16px 0;
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.planet-slide-desc {
+  opacity: 0.9;
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 0 32px 0;
+  color: #eef0f5;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.planet-slide-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #0a0b12;
+  padding: 14px 32px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.planet-slide-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Nav Buttons */
+.planet-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(15, 17, 28, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.planet-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.planet-nav-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.planet-nav-btn.prev {
+  left: 24px;
+}
+
+.planet-nav-btn.next {
+  right: 24px;
+}
+
+.planet-nav-icon {
+  width: 28px;
+  height: 28px;
+  stroke-width: 2.5;
+}
+
+/* Dots */
+.planet-dots-container {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.planet-dot {
+  height: 6px;
+  border-radius: 3px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.planet-dot.active {
+  width: 24px;
+  background: #ffffff;
+}
+
+.planet-dot.inactive {
+  width: 6px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.planet-dot.inactive:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .planet-slider-container {
+    height: 60vh;
+    min-height: 380px;
+    border-radius: 20px;
+  }
+  
+  .planet-slide-content {
+    padding: 24px;
+    padding-bottom: 50px;
+  }
+  
+  .planet-slide-badge {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+  }
+  
+  .planet-slide-desc {
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .planet-slide-btn {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+
+  /* Optimize Nav Buttons for Mobile */
+  .planet-nav-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .planet-nav-btn.prev {
+    left: 12px;
+  }
+
+  .planet-nav-btn.next {
+    right: 12px;
+  }
+  
+  .planet-nav-icon {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .planet-dots-container {
+    bottom: 16px;
+  }
+}
